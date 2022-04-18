@@ -1,18 +1,20 @@
-import React from "react";
+import React, {useState} from "react";
 import './styles/App.css'
-// 34:30
+import PostItem from "./components/PostItem";
+
 function App() {
+    const [post, setPost] = useState([
+        {id: 1, title: 'JavaScript', body: 'Description'},
+        {id: 2, title: 'JavaScript', body: 'Description'},
+        {id: 3, title: 'JavaScript', body: 'Description'},
+        {id: 4, title: 'JavaScript', body: 'Description'}
+    ])
     return (
         <div className="App">
-            <div className="post">
-                <div className="post__content">
-                    <strong>1. Javascript</strong>
-                    <p>Javascript is the language programming</p>
-                </div>
-                <div className="post__btn">
-                    <button>Delete</button>
-                </div>
-            </div>
+            <h1 style={{textAlign: 'center'}}>List</h1>
+            {post.map(post =>
+                <PostItem key={post.id} post={post}/>
+            )}
         </div>
     )
 }
