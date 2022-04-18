@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import './styles/App.css'
-import PostItem from "./components/PostItem";
+import PostList from "./components/PostList";
 
 function App() {
     const [post, setPost] = useState([
@@ -11,10 +11,7 @@ function App() {
     ])
     return (
         <div className="App">
-            <h1 style={{textAlign: 'center'}}>List</h1>
-            {post.map(post =>
-                <PostItem key={post.id} post={post}/>
-            )}
+            <PostList post={post} title={'List'}/>
         </div>
     )
 }
