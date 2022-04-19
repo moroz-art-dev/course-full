@@ -4,23 +4,50 @@ import PostList from "./components/PostList";
 import MyButton from "./components/UI/button/MyButton";
 import MyInput from "./components/UI/input/MyInput";
 import PostForm from "./components/PostForm";
+import MySelect from "./components/UI/select/MySelect";
 
 function App() {
     const [posts, setPosts] = useState([
-        {id: 1, title: 'JavaScript', body: 'Description'},
-        {id: 2, title: 'JavaScript', body: 'Description'},
-        {id: 3, title: 'JavaScript', body: 'Description'},
-        {id: 4, title: 'JavaScript', body: 'Description'}
+        {id: 1, title: 'A JavaScript', body: 'D  Description'},
+        {id: 2, title: 'B JavaScript', body: 'B Description'},
+        {id: 3, title: 'D JavaScript', body: 'A Description'},
+        {id: 4, title: 'C JavaScript', body: 'C Description'}
     ])
-
+    const [selectedSort, setSelectedSort] = useState('')
     const createPost = (newPost) => {
         setPosts([...posts, newPost])
+    }
+
+    const removePost = (post) => {
+        setPosts(posts.filter(p => p.id !== post.id))
+    }
+
+    const sortPost = (sort) => {
+        setSelectedSort(sort)
+        setPosts([...posts].sort((a,b) => a[sort].localeCompare(b[sort])))
     }
 
     return (
         <div className="App">
             <PostForm create={createPost}/>
-            <PostList post={posts} title={'List'}/>
+            <hr style={{margin: '15px 0'}}/>
+            <div>
+                <MySelect
+                    value={selectedSort}
+                    onChange={sortPost}
+                    defaultValue="Sorting by"
+                    options={[
+                        {value: 'title', name: 'Name'},
+                        {value: 'body', name: 'Description'}
+                    ]}/>
+            </div>
+            {posts.length
+                ?
+                <PostList remove={removePost} post={posts} title={'List'}/>
+                :
+                <h1 style={{textAlign: "center"}}>Posts not found!</h1>
+            }
+
         </div>
     )
 }
