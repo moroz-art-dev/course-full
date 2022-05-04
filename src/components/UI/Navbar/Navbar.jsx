@@ -12,7 +12,7 @@ const Navbar = () => {
     }
     return (
         <div className="navbar">
-            <MyButton onClick={() => logout}>Logout</MyButton>
+            <MyButton onClick={logout}>Logout</MyButton>
             <div className="navbar__links">
                 <Link to='/about'>About </Link>
                 <Link to='/posts'>Posts</Link>
