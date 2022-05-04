@@ -1,18 +1,24 @@
 import React from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
+import {routes} from "../router";
 import About from "../pages/About";
 import Posts from "../pages/Posts";
 import Error from "../pages/Error";
 import PostIdPage from "../pages/PostIdPage";
 
 const AppRouter = () => {
+    console.log(routes)
     return (
         <Routes>
-            <Route path='/about' element={<About/>}/>
-            <Route exact path='/posts' element={<Posts/>}/>
-            <Route exact path='/posts/:id' element={<PostIdPage/>}/>
-            <Route path='/error' element={<Error/>}/>
-            <Route path='*' to='/error' element={<Navigate to="/error" replace />}/>
+            {routes.map(route =>
+                <Route
+                    key={route.path}
+                    path={route.path}
+                    element={route.element}
+                    exact={route.exact}
+                />
+            )}
+            <Route path='*' to='/posts' element={<Navigate to="/posts" replace/>}/>
         </Routes>
     );
 };
